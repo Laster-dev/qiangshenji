@@ -82,7 +82,8 @@ namespace 枪神纪
         }
         private static void LoadForm() 
         {
-            ActivePanel.Controls.Clear();
+
+            foreach (Form control in ActivePanel.Controls) { control.Close(); }
             ActiveForm.TopLevel = false;
             ActiveForm.FormBorderStyle = FormBorderStyle.None;
             ActiveForm.Dock = DockStyle.Fill;

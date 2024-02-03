@@ -14,7 +14,7 @@ namespace 枪神纪
         public static void ShowNotification(string text, int duration)
         {
             MessageForm messageForm = new MessageForm(text,duration);
-            messageForm.Show();
+            messageForm.ShowDialog();
         }
         public static IntPtr Qsj { get; set; }
         /// <summary>
