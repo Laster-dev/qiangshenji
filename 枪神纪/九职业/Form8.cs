@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using 枪神纪.Properties;
 
 namespace 枪神纪.九职业
 {
@@ -15,6 +16,7 @@ namespace 枪神纪.九职业
         public Form8()
         {
             InitializeComponent();
+            BackgroundImage = Resources.ld;
         }
     }
 }

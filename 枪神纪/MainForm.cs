@@ -20,7 +20,9 @@ namespace 枪神纪
         {
             InitializeComponent();
             ActivePanel = panel2;
+            ActiveForm = null;
             this.MouseWheel += new MouseEventHandler(this.MainForm_MouseWheel);
+            contextMenuStrip1.Renderer = new CustomContextMenuStripRenderer();
         }
         private void MainForm_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -39,7 +41,45 @@ namespace 枪神纪
             // 可选：如果你有特定的控件需要更新字体，可以在这里设置
             // 如：label1.Font = new Font(label1.Font.FontFamily, newFontSize, label1.Font.Style);
         }
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_NCLBUTTONDBLCLK = 0xA3;
+            const int WM_NCRBUTTONDOWN = 0x00A4;
 
+            switch (m.Msg)
+            {
+                case WM_NCLBUTTONDBLCLK: // 双击
+                    FormUI.DarkThemeTitleBar(this.Handle);
+                    return;
+                case WM_NCRBUTTONDOWN: // 右键
+                    ShowMyContextMenu();
+                    return; // 可能需要移除，取决于是否需要默认行为
+            }
+            base.WndProc(ref m);
+        }
+        public void ShowMyContextMenu()
+        {
+            contextMenuStrip1.Show(Cursor.Position); // 显示在鼠标位置
+        }
+        public class CustomContextMenuStripRenderer : ToolStripProfessionalRenderer
+        {
+            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+            {
+                if (e.Item.Enabled)
+                {
+                    if (e.Item.Selected) // 如果当前项被选中（鼠标悬停）
+                    {
+                        // 设置鼠标悬停时的背景色
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 100, 255)), e.Item.ContentRectangle);
+                    }
+                    else
+                    {
+                        // 设置默认的背景色
+                        base.OnRenderMenuItemBackground(e);
+                    }
+                }
+            }
+        }
         private static void LoadForm() 
         {
             ActivePanel.Controls.Clear();
@@ -112,6 +152,34 @@ namespace 枪神纪
             var form = new Form9();
             ActiveForm = form;
             LoadForm();
+        }
+
+        private void 主题切换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveForm != null) 
+                ActiveForm.ForeColor = FormUI.Theme ? Color.Black : Color.White;
+            FormUI.DarkThemeTitleBar(this.Handle);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            FormUI.UI_全局透明(this.Handle);
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            FormUI.UI_标题栏纯色(this.Handle);
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            FormUI.UI_标题栏原生(this.Handle);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Program.Qsj = WinApi.FindWindow(null,"枪神纪");
+            this.Text = "游戏窗口句柄：" + Program.Qsj.ToString();
         }
     }
 }
