@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using 枪神纪.Properties;
+using 枪神纪.九职业;
 
 namespace 枪神纪
 {
-    public partial class Form1 : Form
+    public partial class MainForm : MyForm
     {
-        public Form1()
+        static Form ActiveForm { get; set; }
+        static Panel ActivePanel { get; set; }
+        public MainForm()
         {
             InitializeComponent();
-            FormUI.DarkThemeTitleBar(this.Handle);
-            FormUI.UI_全局透明(this.Handle);
-            FormUI.InvalidateRect(this.Handle, IntPtr.Zero, true);
+            ActivePanel = panel2;
             this.MouseWheel += new MouseEventHandler(this.MainForm_MouseWheel);
         }
         private void MainForm_MouseWheel(object sender, MouseEventArgs e)
@@ -38,49 +39,79 @@ namespace 枪神纪
             // 可选：如果你有特定的控件需要更新字体，可以在这里设置
             // 如：label1.Font = new Font(label1.Font.FontFamily, newFontSize, label1.Font.Style);
         }
+
+        private static void LoadForm() 
+        {
+            ActivePanel.Controls.Clear();
+            ActiveForm.TopLevel = false;
+            ActiveForm.FormBorderStyle = FormBorderStyle.None;
+            ActiveForm.Dock = DockStyle.Fill;
+            ActivePanel.Controls.Add(ActiveForm);
+            ActiveForm.Show();
+            GC.Collect();
+        }
+
         private void pictureBox8_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.df;
+            var form1 = new Form1();
+            ActiveForm = form1;
+            LoadForm();
         }
 
         private void pictureBox9_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.ly;
+            var form = new Form2();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox11_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.sq;
+            var form = new Form3();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox12_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.jq;
+            var form = new Form4();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox13_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.dd;
+            var form = new Form5();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox14_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.jj;
+            var form = new Form6();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox15_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.ys;
+            var form = new Form7();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox16_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.ld;
+            var form = new Form8();
+            ActiveForm = form;
+            LoadForm();
         }
 
         private void pictureBox17_Click(object sender, EventArgs e)
         {
-            panel2.BackgroundImage = Resources.gcs;
+            var form = new Form9();
+            ActiveForm = form;
+            LoadForm();
         }
     }
 }
