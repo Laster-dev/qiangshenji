@@ -27,7 +27,8 @@ namespace 枪神纪
             Font currentFont = this.Font;
 
             // 定义字体大小调整的步长
-            float fontSizeChange = e.Delta > 0 ? 1 : -1;
+            float fontSizeChange = e.Delta > 0 ? 0.3f : -0.3f;//大小
+
             // 计算新的字体大小，确保字体大小至少为1
             float newFontSize = Math.Max(1, currentFont.Size + fontSizeChange);
 
