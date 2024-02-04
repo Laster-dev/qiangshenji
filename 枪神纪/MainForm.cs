@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,6 +86,8 @@ namespace 枪神纪
         {
 
             foreach (Form control in ActivePanel.Controls) { control.Close(); }
+            if (ActiveForm == null)
+                return;
             ActiveForm.TopLevel = false;
             ActiveForm.FormBorderStyle = FormBorderStyle.None;
             ActiveForm.Dock = DockStyle.Fill;
@@ -181,6 +185,27 @@ namespace 枪神纪
         {
             Program.Qsj = WinApi.FindWindow(null,"枪神纪");
             this.Text = "游戏窗口句柄：" + Program.Qsj.ToString();
+        }
+     
+        private async void MainForm_Load(object sender, EventArgs e)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://game.gtimg.cn/images/tps/web201711/header-bg.jpg"))
+                {
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        panel2.BackgroundImage = new Bitmap(stream);
+                        //return new Bitmap(stream);
+                    }
+                }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ActiveForm = null;
+            LoadForm();
         }
     }
 }
