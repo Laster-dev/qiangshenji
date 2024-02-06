@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿
+
+using System;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
-using 枪神纪.Properties;
+
 using 枪神纪.九职业;
+
+using static 枪神纪.WinApi;
 
 namespace 枪神纪
 {
@@ -82,7 +80,7 @@ namespace 枪神纪
                 }
             }
         }
-        private static void LoadForm() 
+        private static void LoadForm()
         {
 
             foreach (Form control in ActivePanel.Controls) { control.Close(); }
@@ -161,7 +159,7 @@ namespace 枪神纪
 
         private void 主题切换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveForm != null) 
+            if (ActiveForm != null)
                 ActiveForm.ForeColor = FormUI.Theme ? Color.Black : Color.White;
             FormUI.DarkThemeTitleBar(this.Handle);
         }
@@ -183,29 +181,56 @@ namespace 枪神纪
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Program.Qsj = WinApi.FindWindow(null,"枪神纪");
+            Program.Qsj = WinApi.FindWindow(null, "枪神纪");
             this.Text = "游戏窗口句柄：" + Program.Qsj.ToString();
         }
-     
+
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync("https://game.gtimg.cn/images/tps/web201711/header-bg.jpg"))
-                {
-                    using (var stream = await response.Content.ReadAsStreamAsync())
-                    {
-                        panel2.BackgroundImage = new Bitmap(stream);
-                        //return new Bitmap(stream);
-                    }
-                }
-            }
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             ActiveForm = null;
             LoadForm();
+        }
+
+        private async void timer_识别_Tick(object sender, EventArgs e)
+        {
+            if (Program.Qsj != IntPtr.Zero)
+            {
+                RECT windowRect; GetWindowRect(Program.Qsj, out windowRect);
+                int width = 350;
+                int height = 350;
+                IntPtr hdcSrc = GetDC(Program.Qsj);
+                IntPtr hdcDest = CreateCompatibleDC(hdcSrc);
+                IntPtr hBitmap = CreateCompatibleBitmap(hdcSrc, width, height);
+                IntPtr hOldBitmap = SelectObject(hdcDest, hBitmap);
+                BitBlt(hdcDest, 0, 0, width, height, hdcSrc, (windowRect.Right + windowRect.Left - width) / 2, (windowRect.Bottom + windowRect.Top - height) / 2, 0x00CC0020);
+                Bitmap screenshot = System.Drawing.Image.FromHbitmap(hBitmap);
+                SelectObject(hdcDest, hOldBitmap); DeleteObject(hBitmap);
+                DeleteDC(hdcDest);
+                ReleaseDC(Program.Qsj, hdcSrc);
+                //pictureBox2.Image = screenshot;
+            }
+            else
+            {
+                Console.WriteLine("找不到指定的窗口");
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+        
+
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            GC.Collect();
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

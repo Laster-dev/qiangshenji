@@ -14,7 +14,7 @@ namespace 枪神纪.九职业
         {
             InitializeComponent();
             BackgroundImage = Resources.df;
-            contextMenuStrip1.Renderer = new CustomContextMenuStripRenderer();
+            //contextMenuStrip1.Renderer = new CustomContextMenuStripRenderer();
         }
         Color GameColor = Color.FromArgb(12, 230, 0);
         //12,230,0
@@ -38,8 +38,7 @@ namespace 枪神纪.九职业
                         return;
                     }
                 }
-                WinApi.mouse_event(WinApi.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);// 模拟鼠标左键
-                WinApi.mouse_event(WinApi.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                WinApi.LeftMouseClick();
             }
         }
 

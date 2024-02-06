@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,24 @@ namespace 枪神纪
             this.BackColor = Color.Black;
             this.ForeColor = Color.White;
             this.BackgroundImageLayout = ImageLayout.Center;
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // MyForm
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "MyForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MyForm_FormClosed);
+            this.ResumeLayout(false);
+
+        }
+
+        private void MyForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GC.Collect();
         }
     }
 }

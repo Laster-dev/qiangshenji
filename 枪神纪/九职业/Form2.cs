@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using 枪神纪.Properties;
 
 namespace 枪神纪.九职业
@@ -82,9 +77,7 @@ namespace 枪神纪.九职业
                         return;
                     }
                 }
-                WinApi.mouse_event(WinApi.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);// 模拟鼠标左键
-                await Task.Delay(20);
-                WinApi.mouse_event(WinApi.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                WinApi.LeftMouseClick();
             }
         }
     }

@@ -11,11 +11,22 @@ namespace 枪神纪
 {
     internal class WinApi
     {
+        [DllImport("gdi32.dll")] 
+        public static extern IntPtr CreateCompatibleDC(IntPtr hdc); 
+        [DllImport("gdi32.dll")] 
+        public static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight); 
+        [DllImport("gdi32.dll")] 
+        public static extern IntPtr SelectObject(IntPtr hdc, IntPtr hObject); 
+        [DllImport("gdi32.dll")] 
+        public static extern bool BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, int dwRop); 
+        [DllImport("gdi32.dll")] 
+        public static extern bool DeleteObject(IntPtr hObject);
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow(); 
         [DllImport("user32.dll")]
         public static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
+        [DllImport("gdi32.dll")] 
+        public static extern bool DeleteDC(IntPtr hdc); // 导入DeleteDC函数
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
@@ -44,8 +55,49 @@ namespace 枪神纪
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
         [DllImport("user32.dll", SetLastError = true)]
         public static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, int dwExtraInfo);
-        public const int MOUSEEVENTF_LEFTDOWN = 0x02;
-        public const int MOUSEEVENTF_LEFTUP = 0x04;
+        [DllImport("user32.dll")]
+        static extern short GetAsyncKeyState(int vKey); 
+        /// <summary>
+        /// 判断某个键有没有被按下
+        /// </summary>
+        /// <param name="vKey"></param>
+        /// <returns></returns>
+        public static bool IsKeyPressed(int vKey) 
+        { 
+            return (GetAsyncKeyState(vKey) & 0x8000) != 0; 
+        }
+        [DllImport("user32.dll")] 
+        static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+        private const uint MOUSEEVENTF_MOVE = 0x0001;
+        /// <summary>
+        /// 相对移动鼠标位置
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        public static void MoveMouse(int dx, int dy) 
+        { 
+            mouse_event(MOUSEEVENTF_MOVE, (uint)dx, (uint)dy, 0, 0);
+        }
+        private const uint MOUSEEVENTF_LEFTDOWN = 0x0002; // 左键按下
+        private const uint MOUSEEVENTF_LEFTUP = 0x0004;   // 左键抬起
+        private const uint MOUSEEVENTF_RIGHTDOWN = 0x0008; // 右键按下
+        private const uint MOUSEEVENTF_RIGHTUP = 0x0010;   // 右键抬起
+        public static void LeftMouseClick(){    
+            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); // 模拟左键按下
+            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);   // 模拟左键抬起
+        }
+        public static void RightMouseClick(){  
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0); // 模拟右键按下
+            mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);   // 模拟右键抬起
+        }
+        [DllImport("user32.dll")] 
+        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo); 
+        private const uint KEYEVENTF_KEYDOWN = 0x0000; // 按下键
+        private const uint KEYEVENTF_KEYUP = 0x0002; // 抬起键
+        public static void Key(byte key){ 
+            keybd_event(key, 0, KEYEVENTF_KEYDOWN, 0); 
+            keybd_event(key, 0, KEYEVENTF_KEYUP, 0); // 抬起
+        }
         public static Size GetWindowSize(IntPtr hWnd)
         {
             WinApi.RECT rect;
