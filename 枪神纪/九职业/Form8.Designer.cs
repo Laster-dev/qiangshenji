@@ -45,7 +45,7 @@
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowCheckMargin = true;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(124, 28);
             // 
             // 自动背刺ToolStripMenuItem
             // 
@@ -53,7 +53,7 @@
             this.自动背刺ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1});
             this.自动背刺ToolStripMenuItem.Name = "自动背刺ToolStripMenuItem";
-            this.自动背刺ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.自动背刺ToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.自动背刺ToolStripMenuItem.Text = "榴弹跳";
             this.自动背刺ToolStripMenuItem.Click += new System.EventHandler(this.自动背刺ToolStripMenuItem_Click);
             // 

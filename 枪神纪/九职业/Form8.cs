@@ -44,10 +44,10 @@ namespace 枪神纪.九职业
                     WinApi.MoveMouse(M, 700);                                 //向下/后
                     await Task.Delay(5);
                     WinApi.LeftMouseClick();                                    //左
-                    await Task.Delay(20);
-                    WinApi.MoveMouse(-M, -700);
+                    await Task.Delay(50);
+                    WinApi.MoveMouse(-M, -700);                                 //回反向
                     WinApi.Key(32);                                             //空格
-                    await Task.Delay(20);
+                    await Task.Delay(25);
                     WinApi.RightMouseClick();                                     // 模拟鼠标右键
 
                 }

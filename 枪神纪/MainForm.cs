@@ -12,7 +12,7 @@ using static 枪神纪.WinApi;
 
 namespace 枪神纪
 {
-    public partial class MainForm : MyForm
+    public partial class MainForm : Form
     {
         static Form ActiveForm { get; set; }
         static Panel ActivePanel { get; set; }
@@ -23,7 +23,9 @@ namespace 枪神纪
             ActiveForm = null;
             this.MouseWheel += new MouseEventHandler(this.MainForm_MouseWheel);
             contextMenuStrip1.Renderer = new CustomContextMenuStripRenderer();
+
         }
+
         private void MainForm_MouseWheel(object sender, MouseEventArgs e)
         {
             // 获取当前字体
@@ -41,6 +43,8 @@ namespace 枪神纪
             // 可选：如果你有特定的控件需要更新字体，可以在这里设置
             // 如：label1.Font = new Font(label1.Font.FontFamily, newFontSize, label1.Font.Style);
         }
+        int h { get; set; }
+        bool hi = false;
         protected override void WndProc(ref Message m)
         {
             const int WM_NCLBUTTONDBLCLK = 0xA3;
@@ -49,7 +53,18 @@ namespace 枪神纪
             switch (m.Msg)
             {
                 case WM_NCLBUTTONDBLCLK: // 双击
-                    FormUI.DarkThemeTitleBar(this.Handle);
+                    //FormUI.DarkThemeTitleBar(this.Handle);
+                    hi = !hi;
+                    if (hi)
+                    {
+                        h = this.Height;
+                        this.Height = 0;
+                    }
+                    else
+                    {
+                        this.Height = h;
+                    }
+                    
                     return;
                 case WM_NCRBUTTONDOWN: // 右键
                     ShowMyContextMenu();
@@ -222,7 +237,7 @@ namespace 枪神纪
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-        
+
 
         }
 
@@ -231,6 +246,16 @@ namespace 枪神纪
 
             GC.Collect();
             Process.GetCurrentProcess().Kill();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            WinApi.RECT rect;
+            if (WinApi.GetWindowRect(Program.Qsj, out rect))
+            { 
+                this.Left = rect.Left;
+                this.Top = rect.Top;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace 枪神纪
@@ -56,6 +57,7 @@ namespace 枪神纪
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_识别 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -294,6 +296,11 @@ namespace 枪神纪
             this.timer_识别.Interval = 3000;
             this.timer_识别.Tick += new System.EventHandler(this.timer_识别_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 10;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -302,11 +309,10 @@ namespace 枪神纪
             this.ClientSize = new System.Drawing.Size(684, 383);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
@@ -349,8 +355,10 @@ namespace 枪神纪
         private ToolStripMenuItem toolStripMenuItem3;
         private ToolStripMenuItem toolStripMenuItem4;
         private Timer timer1;
-        private PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private Timer timer_识别;
+        private Timer timer2;
     }
+
 }
 

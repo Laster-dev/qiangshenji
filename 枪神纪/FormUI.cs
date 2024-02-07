@@ -98,4 +98,18 @@ namespace 枪神纪
             DwmExtendFrameIntoClientArea(hwnd, ref margins);
         }
     }
+
+    //internal class CustomPictureBox : PictureBox
+    //{
+    //    // 定义事件，用于将消息传递出去
+    //    public event Action<string> MessageReceived;
+    //    protected override void WndProc(ref Message m)
+    //    {
+    //        if (m.Msg >= 0x0200 && m.Msg <= 0x020D)
+    //        {
+    //            MessageReceived?.Invoke($"Message: {m.Msg}");
+    //        }
+    //        base.WndProc(ref m);
+    //    }
+    //}
 }
