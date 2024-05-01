@@ -81,7 +81,7 @@ namespace 枪神纪
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(684, 383);
+            this.panel1.Size = new System.Drawing.Size(685, 404);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -90,7 +90,7 @@ namespace 枪神纪
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(684, 68);
+            this.panel3.Size = new System.Drawing.Size(685, 68);
             this.panel3.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -109,7 +109,7 @@ namespace 枪神纪
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(684, 68);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(685, 68);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -232,7 +232,7 @@ namespace 枪神纪
             this.panel2.ForeColor = System.Drawing.Color.Black;
             this.panel2.Location = new System.Drawing.Point(0, 74);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(684, 309);
+            this.panel2.Size = new System.Drawing.Size(685, 330);
             this.panel2.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -298,6 +298,7 @@ namespace 枪神纪
             // 
             // timer2
             // 
+            this.timer2.Enabled = true;
             this.timer2.Interval = 10;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
@@ -306,9 +307,10 @@ namespace 枪神纪
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(684, 383);
+            this.ClientSize = new System.Drawing.Size(685, 404);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";

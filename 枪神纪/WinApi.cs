@@ -78,10 +78,10 @@ namespace 枪神纪
         { 
             mouse_event(MOUSEEVENTF_MOVE, (uint)dx, (uint)dy, 0, 0);
         }
-        private const uint MOUSEEVENTF_LEFTDOWN = 0x0002; // 左键按下
-        private const uint MOUSEEVENTF_LEFTUP = 0x0004;   // 左键抬起
-        private const uint MOUSEEVENTF_RIGHTDOWN = 0x0008; // 右键按下
-        private const uint MOUSEEVENTF_RIGHTUP = 0x0010;   // 右键抬起
+        public const uint MOUSEEVENTF_LEFTDOWN = 0x0002; // 左键按下
+        public const uint MOUSEEVENTF_LEFTUP = 0x0004;   // 左键抬起
+        public const uint MOUSEEVENTF_RIGHTDOWN = 0x0008; // 右键按下
+        public const uint MOUSEEVENTF_RIGHTUP = 0x0010;   // 右键抬起
         public static void LeftMouseClick(){    
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); // 模拟左键按下
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);   // 模拟左键抬起
@@ -90,14 +90,16 @@ namespace 枪神纪
             mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0); // 模拟右键按下
             mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);   // 模拟右键抬起
         }
-        [DllImport("user32.dll")] 
-        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo); 
-        private const uint KEYEVENTF_KEYDOWN = 0x0000; // 按下键
-        private const uint KEYEVENTF_KEYUP = 0x0002; // 抬起键
+        [DllImport("user32.dll")]
+        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+        public const uint KEYEVENTF_KEYDOWN = 0x0000; // 按下键
+        public const uint KEYEVENTF_KEYUP = 0x0002; // 抬起键
         public static void Key(byte key){ 
             keybd_event(key, 0, KEYEVENTF_KEYDOWN, 0); 
             keybd_event(key, 0, KEYEVENTF_KEYUP, 0); // 抬起
         }
+        public const int KEYEVENTF_EXTENDEDKEY = 0x1; 
+  
         public static Size GetWindowSize(IntPtr hWnd)
         {
             WinApi.RECT rect;

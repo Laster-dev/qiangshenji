@@ -36,7 +36,7 @@ namespace 枪神纪.九职业
                 if (WinApi.IsKeyPressed(5))
                 {
                     WinApi.MoveMouse(0, 700);                                   //向下
-                    await Task.Delay(50);
+                    await Task.Delay(30);
                     WinApi.Key(32);                                             //空格
                     //await Task.Delay(50);
                     WinApi.LeftMouseClick();
@@ -53,6 +53,11 @@ namespace 枪神纪.九职业
             {
                 thread.Abort();
             }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

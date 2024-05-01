@@ -44,13 +44,14 @@
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip1.ShowCheckMargin = true;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(124, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 自动背刺ToolStripMenuItem
             // 
             this.自动背刺ToolStripMenuItem.CheckOnClick = true;
             this.自动背刺ToolStripMenuItem.Name = "自动背刺ToolStripMenuItem";
-            this.自动背刺ToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.自动背刺ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.自动背刺ToolStripMenuItem.Text = "导弹跳";
             this.自动背刺ToolStripMenuItem.Click += new System.EventHandler(this.自动背刺ToolStripMenuItem_Click);
             // 

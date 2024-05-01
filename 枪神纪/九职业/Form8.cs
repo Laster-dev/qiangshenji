@@ -41,14 +41,28 @@ namespace 枪神纪.九职业
             {
                 if (WinApi.IsKeyPressed(5))
                 {
+                    /*
                     WinApi.MoveMouse(M, 700);                                 //向下/后
                     await Task.Delay(5);
                     WinApi.LeftMouseClick();                                    //左
-                    await Task.Delay(50);
+                    await Task.Delay(15);
                     WinApi.MoveMouse(-M, -700);                                 //回反向
                     WinApi.Key(32);                                             //空格
-                    await Task.Delay(25);
+                    await Task.Delay(15);
                     WinApi.RightMouseClick();                                     // 模拟鼠标右键
+                    await Task.Delay(15);
+                    */
+
+                    WinApi.MoveMouse(M, 700);                                 //向下/后
+                    await Task.Delay(0);
+                    WinApi.Key(32);                                             //空格
+                    WinApi.LeftMouseClick();                                    //左
+                    await Task.Delay(10);
+                    WinApi.RightMouseClick();                                     // 模拟鼠标右键
+                    WinApi.MoveMouse(-M, -700);                                 //回反向
+
+                    await Task.Delay(500);
+
 
                 }
                 Thread.Sleep(5);
@@ -60,6 +74,7 @@ namespace 枪神纪.九职业
             if (thread != null)
             {
                 thread.Abort();
+                
             }
         }
     }
