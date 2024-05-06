@@ -53,13 +53,13 @@ namespace 枪神纪.九职业
                     await Task.Delay(15);
                     */
 
-                    WinApi.MoveMouse(M, 700);                                 //向下/后
+                    WinApi.MoveMouse(M, 00);                                 //向下/后
                     await Task.Delay(0);
                     WinApi.Key(32);                                             //空格
                     WinApi.LeftMouseClick();                                    //左
                     await Task.Delay(10);
                     WinApi.RightMouseClick();                                     // 模拟鼠标右键
-                    WinApi.MoveMouse(-M, -700);                                 //回反向
+                    WinApi.MoveMouse(-M, -00);                                 //回反向
 
                     await Task.Delay(500);
 

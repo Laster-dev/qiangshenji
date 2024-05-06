@@ -35,13 +35,16 @@ namespace 枪神纪.九职业
             {
                 if (WinApi.IsKeyPressed(5))
                 {
-                    WinApi.MoveMouse(0, 700);                                   //向下
-                    await Task.Delay(30);
-                    WinApi.Key(32);                                             //空格
-                    //await Task.Delay(50);
+                    WinApi.MoveMouse(0, 300);                                   //向下
+                    await Task.Delay(0);
+                    WinApi.keybd_event(17, 0, WinApi.KEYEVENTF_KEYDOWN, 0);
+                    WinApi.Key(32);                                                 //空格
+                                 
+                    await Task.Delay(10);
                     WinApi.LeftMouseClick();
                     await Task.Delay(5);
-                    WinApi.MoveMouse(0, -700);
+                    WinApi.MoveMouse(0, -300);
+                    WinApi.keybd_event(17, 0, WinApi.KEYEVENTF_KEYUP, 0); // 抬起      
                 }
                 Thread.Sleep(5);
             }
